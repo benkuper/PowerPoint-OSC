@@ -4,7 +4,7 @@ A Powerpoint add-in for basic control of powerpoint presentations with OSC
 ## Installation
 
 - Download and extract the installer here : http://benjamin.kuperberg.fr/download/powerpoint-osc.zip
-- Launch **setup.exe**
+- Launch **PowerPoint-OSC.vsto**
 - Launch PowerPoint, you should see an "OSC" Tab, where you can configure the host and port to receive and send OSC messages.
 
 ## Usage
