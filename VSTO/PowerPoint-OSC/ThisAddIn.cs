@@ -50,6 +50,9 @@ namespace PowerPoint_OSC
             listener = new UDPListener(localPort, processMessage);
 
             sender = new UDPSender(remoteHost,remotePort);
+
+            sendCurrentSlide();
+            sendTotalSlides();
         }
 
        
@@ -79,7 +82,7 @@ namespace PowerPoint_OSC
                     // Completely unknown error
                 }
             }
-            else if (msg.Address == "/page")
+            else if (msg.Address == "/slide")
             {
                 if(msg.Arguments.Count >= 1)
                 {
@@ -98,19 +101,26 @@ namespace PowerPoint_OSC
         }
 
         //Events
-
         private void onNextSlide(SlideShowWindow Wn)
         {
             // slide changed, send data
-            sendCurrentPage();
+            sendCurrentSlide();
+            sendTotalSlides();
         }
 
-        void sendCurrentPage()
+        void sendCurrentSlide()
         {
-            OscMessage m = new OscMessage("/page", Application.ActivePresentation.SlideShowWindow.View.CurrentShowPosition);
+            if(Application.Presentations.Count == 0) return;
+            OscMessage m = new OscMessage("/currentSlide", Application.ActivePresentation.SlideShowWindow.View.CurrentShowPosition);
             sender.Send(m);
         }
 
+        void sendTotalSlides()
+        {
+            if (Application.Presentations.Count == 0) return;
+            OscMessage m = new OscMessage("/totalSlides", Application.ActivePresentation.Slides.Count);
+            sender.Send(m);
+        }
 
         #region VSTO generated code
 
