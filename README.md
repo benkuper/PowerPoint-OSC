@@ -13,6 +13,11 @@ A Powerpoint add-in for basic control of powerpoint presentations with OSC
 You can control slides by using :
 - **/next** Next slide
 - **/previous** Previous slide
-- **/page <int>** Go to a specific slide (ex: /page 1)
+- **/slide <int>** Go to a specific slide (ex: /page 1)
+  
+  
+You can receive slide information by checking these messages on reception :
+- **/currentSlide <int>** The index of the current slide
+- **/totalSlides  <int>** The total number of slides in the presentation
 
 Also, when the slide has changed, Powerpoint will send a /page <int> message as well with the current slide index.
