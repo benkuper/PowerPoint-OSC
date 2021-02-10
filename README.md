@@ -19,5 +19,3 @@ You can control slides by using :
 You can receive slide information by checking these messages on reception :
 - **/currentSlide (int)** The index of the current slide
 - **/totalSlides  (int)** The total number of slides in the presentation
-
-Also, when the slide has changed, Powerpoint will send a /page <int> message as well with the current slide index.
