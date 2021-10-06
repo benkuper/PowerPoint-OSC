@@ -43,8 +43,10 @@ namespace PowerPoint_OSC
 
             HandleOscPacket callback = delegate (OscPacket packet)
             {
-                var messageReceived = (OscMessage)packet;
-                if(messageReceived != null) Console.WriteLine("Received a message! "+messageReceived.Address);
+                if(packet is OscMessage messageReceived)
+                    if(messageReceived != null) Console.WriteLine("Received a message! "+messageReceived.Address);
+                if(packet is OscBundle bundleReceived)
+                    if(bundleReceived != null) Console.WriteLine("Received a Bundle!");
             };
               
             listener = new UDPListener(localPort, processMessage);
@@ -58,7 +60,22 @@ namespace PowerPoint_OSC
        
         void processMessage(OscPacket packet)
         {
-            var msg = (OscMessage)packet;
+            if (packet is OscMessage msg)
+            {
+                handleMessage(msg);
+            }
+            if (packet is OscBundle bundle)
+                handleBundle(bundle);
+        }
+
+        private void handleBundle(OscBundle bundle)
+        {
+            foreach (OscMessage msg in bundle.Messages)
+                handleMessage(msg);
+        }
+
+        private void handleMessage(OscMessage msg)
+        {
             if (msg.Address == "/next")
             {
                 try
@@ -84,7 +101,7 @@ namespace PowerPoint_OSC
             }
             else if (msg.Address == "/slide")
             {
-                if(msg.Arguments.Count >= 1)
+                if (msg.Arguments.Count >= 1)
                 {
                     int page = (int)msg.Arguments[0];
                     try
@@ -96,7 +113,7 @@ namespace PowerPoint_OSC
                         // Completely unknown error
                     }
                 }
-               
+
             }
         }
 
