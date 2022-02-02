@@ -3,7 +3,7 @@ A Powerpoint add-in for basic control of powerpoint presentations with OSC
 
 ## Installation
 
-**THE RELEASE OF THIS VERSION ONLY WORKS ON WINDOWS, AND HAS ONLY BEEN TESTED WITH POWERPOINT 2016**
+**THE RELEASE OF THIS VERSION ONLY WORKS ON WINDOWS, AND HAS ONLY BEEN TESTED WITH POWERPOINT 2016 AND OFFICE 365**
 
 - Download and extract the add-in from here : http://benjamin.kuperberg.fr/download/powerpoint-osc.zip
 - Launch **install.bat** (You may have to run it as administrator if you get an error message)
